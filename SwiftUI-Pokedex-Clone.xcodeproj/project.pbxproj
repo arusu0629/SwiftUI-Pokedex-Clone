@@ -29,6 +29,16 @@
 		2F72DC962D2633810000843F /* SwiftUI-Pokedex-CloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftUI-Pokedex-CloneUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2F72DCC72D2636AD0000843F /* Exceptions for "Packages" folder in "SwiftUI-Pokedex-Clone" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AppPackage,
+			);
+			target = 2F72DC792D26337F0000843F /* SwiftUI-Pokedex-Clone */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2F72DC7C2D26337F0000843F /* SwiftUI-Pokedex-Clone */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -43,6 +53,14 @@
 		2F72DC992D2633810000843F /* SwiftUI-Pokedex-CloneUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "SwiftUI-Pokedex-CloneUITests";
+			sourceTree = "<group>";
+		};
+		2F72DCC22D26361F0000843F /* Packages */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2F72DCC72D2636AD0000843F /* Exceptions for "Packages" folder in "SwiftUI-Pokedex-Clone" target */,
+			);
+			path = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +93,7 @@
 		2F72DC712D26337F0000843F = {
 			isa = PBXGroup;
 			children = (
+				2F72DCC22D26361F0000843F /* Packages */,
 				2F72DC7C2D26337F0000843F /* SwiftUI-Pokedex-Clone */,
 				2F72DC8F2D2633810000843F /* SwiftUI-Pokedex-CloneTests */,
 				2F72DC992D2633810000843F /* SwiftUI-Pokedex-CloneUITests */,
@@ -109,6 +128,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				2F72DC7C2D26337F0000843F /* SwiftUI-Pokedex-Clone */,
+				2F72DCC22D26361F0000843F /* Packages */,
 			);
 			name = "SwiftUI-Pokedex-Clone";
 			packageProductDependencies = (
@@ -329,6 +349,8 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 			};
 			name = Debug;
 		};
@@ -384,6 +406,8 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -411,6 +435,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "nakandakari.toru.SwiftUI-Pokedex-Clone";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -439,6 +465,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "nakandakari.toru.SwiftUI-Pokedex-Clone";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -456,6 +484,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "nakandakari.toru.SwiftUI-Pokedex-CloneTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUI-Pokedex-Clone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftUI-Pokedex-Clone";
@@ -474,6 +504,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "nakandakari.toru.SwiftUI-Pokedex-CloneTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUI-Pokedex-Clone.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftUI-Pokedex-Clone";
@@ -490,6 +522,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "nakandakari.toru.SwiftUI-Pokedex-CloneUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "SwiftUI-Pokedex-Clone";
@@ -506,6 +540,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "nakandakari.toru.SwiftUI-Pokedex-CloneUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_GLOBAL_CONCURRENCY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "SwiftUI-Pokedex-Clone";
