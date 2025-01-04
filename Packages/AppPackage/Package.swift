@@ -32,6 +32,7 @@ extension SwiftSetting {
 // MARK: - Products
 enum Products: String, CaseIterable, PackageAtom {
     case entity
+    case sharedExtension
 
     var targets: [String] {
         Targets.targets(for: self)
@@ -77,10 +78,12 @@ enum Dependencies: String, CaseIterable, PackageAtom {
 // MARK: - Targets
 enum Targets: String, CaseIterable, PackageAtom {
     case entity
+    case sharedExtension
 
     var targetType: TargetType {
         switch self {
-        case .entity:
+        case .entity,
+             .sharedExtension:
             .production
         }
     }
@@ -95,6 +98,8 @@ enum Targets: String, CaseIterable, PackageAtom {
         switch self {
         case .entity:
             "\(capitalizedName)"
+        case .sharedExtension:
+            "Extension/\(capitalizedName)"
         }
     }
 
@@ -102,8 +107,10 @@ enum Targets: String, CaseIterable, PackageAtom {
         switch self {
         case .entity:
             [
-
+                Targets.sharedExtension.asDependency
             ]
+        case .sharedExtension:
+            []
         }
     }
 
