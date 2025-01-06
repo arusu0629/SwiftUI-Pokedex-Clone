@@ -32,6 +32,7 @@ extension SwiftSetting {
 // MARK: - Products
 enum Products: String, CaseIterable, PackageAtom {
     case entity
+    case pokeAPIClientWrapper
     case sharedExtension
 
     var targets: [String] {
@@ -49,6 +50,10 @@ enum Products: String, CaseIterable, PackageAtom {
 // MARK: - Dependencies
 enum Dependencies: String, CaseIterable, PackageAtom {
     case swiftLint
+    case swiftOpenAPIGenerator = "swift-openapi-generator"
+    case swiftDependencies = "swift-dependencies"
+    case swiftOpenAPIRuntime = "swift-openapi-runtime"
+    case swiftOpenAPIUrlSession = "swift-openapi-urlsession"
 
     var value: Package.Dependency {
         switch self {
@@ -56,6 +61,22 @@ enum Dependencies: String, CaseIterable, PackageAtom {
             .package(
                 url: "https://github.com/realm/SwiftLint.git",
                 from: "0.57.0"
+            )
+        case .swiftDependencies:
+            .package(
+                url: "https://github.com/pointfreeco/swift-dependencies.git", exact: "1.4.1"
+            )
+        case .swiftOpenAPIGenerator:
+            .package(
+                url: "https://github.com/apple/swift-openapi-generator", exact: "1.3.1"
+            )
+        case .swiftOpenAPIRuntime:
+            .package(
+                url: "https://github.com/apple/swift-openapi-runtime", exact: "1.5.0"
+            )
+        case .swiftOpenAPIUrlSession:
+            .package(
+                url: "https://github.com/apple/swift-openapi-urlsession", exact: "1.0.2"
             )
         }
     }
@@ -78,11 +99,13 @@ enum Dependencies: String, CaseIterable, PackageAtom {
 // MARK: - Targets
 enum Targets: String, CaseIterable, PackageAtom {
     case entity
+    case pokeAPIClientWrapper
     case sharedExtension
 
     var targetType: TargetType {
         switch self {
         case .entity,
+             .pokeAPIClientWrapper,
              .sharedExtension:
             .production
         }
@@ -90,7 +113,8 @@ enum Targets: String, CaseIterable, PackageAtom {
 
     static var commonDependenciesForScreen: [Target.Dependency] {
         [
-
+            Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+            Targets.entity.asDependency,
         ]
     }
 
@@ -98,6 +122,8 @@ enum Targets: String, CaseIterable, PackageAtom {
         switch self {
         case .entity:
             "\(capitalizedName)"
+        case .pokeAPIClientWrapper:
+            "Wrappers/\(capitalizedName)"
         case .sharedExtension:
             "Extension/\(capitalizedName)"
         }
@@ -109,14 +135,31 @@ enum Targets: String, CaseIterable, PackageAtom {
             [
                 Targets.sharedExtension.asDependency
             ]
+        case .pokeAPIClientWrapper:
+            [
+                Targets.sharedExtension.asDependency,
+                Dependencies.swiftOpenAPIRuntime.asDependency(productName: .specified(name: "OpenAPIRuntime")),
+                Dependencies.swiftOpenAPIUrlSession.asDependency(productName: .specified(name: "OpenAPIURLSession")),
+                Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+                Targets.entity.asDependency
+            ]
         case .sharedExtension:
             []
         }
     }
 
-    // TODO
     var plugins: [Target.PluginUsage] {
-        []
+        switch self {
+        case .pokeAPIClientWrapper:
+            [
+                .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint"),
+                .plugin(name: "OpenAPIGenerator", package: "swift-openapi-generator"),
+            ]
+        default:
+            [
+                .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint"),
+            ]
+        }
     }
 
     var value: Target {
