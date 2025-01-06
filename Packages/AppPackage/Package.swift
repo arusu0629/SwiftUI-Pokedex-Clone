@@ -33,6 +33,7 @@ extension SwiftSetting {
 enum Products: String, CaseIterable, PackageAtom {
     case entity
     case getPokemonListUseCase
+    case logger
     case pokeAPIClientWrapper
     case sharedExtension
 
@@ -101,6 +102,7 @@ enum Dependencies: String, CaseIterable, PackageAtom {
 enum Targets: String, CaseIterable, PackageAtom {
     case entity
     case getPokemonListUseCase
+    case logger
     case pokeAPIClientWrapper
     case sharedExtension
 
@@ -108,6 +110,7 @@ enum Targets: String, CaseIterable, PackageAtom {
         switch self {
         case .entity,
              .getPokemonListUseCase,
+             .logger,
              .pokeAPIClientWrapper,
              .sharedExtension:
             .production
@@ -118,12 +121,14 @@ enum Targets: String, CaseIterable, PackageAtom {
         [
             Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
             Targets.entity.asDependency,
+            Targets.logger.asDependency,
         ]
     }
 
     var pathName: String {
         switch self {
-        case .entity:
+        case .entity,
+             .logger:
             "\(capitalizedName)"
         case .getPokemonListUseCase:
             "UseCases/\(capitalizedName)"
@@ -146,6 +151,11 @@ enum Targets: String, CaseIterable, PackageAtom {
                 Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
                 Targets.entity.asDependency,
                 Targets.pokeAPIClientWrapper.asDependency,
+            ]
+        case .logger:
+            [
+                Targets.sharedExtension.asDependency,
+                Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
             ]
         case .pokeAPIClientWrapper:
             [
