@@ -31,10 +31,12 @@ extension SwiftSetting {
 
 // MARK: - Products
 enum Products: String, CaseIterable, PackageAtom {
+    case dependencyContainer
     case entity
     case getPokemonListUseCase
     case logger
     case pokeAPIClientWrapper
+    case router
     case routerCore
     case sharedExtension
 
@@ -101,19 +103,23 @@ enum Dependencies: String, CaseIterable, PackageAtom {
 
 // MARK: - Targets
 enum Targets: String, CaseIterable, PackageAtom {
+    case dependencyContainer
     case entity
     case getPokemonListUseCase
     case logger
     case pokeAPIClientWrapper
+    case router
     case routerCore
     case sharedExtension
 
     var targetType: TargetType {
         switch self {
-        case .entity,
+        case .dependencyContainer,
+             .entity,
              .getPokemonListUseCase,
              .logger,
              .pokeAPIClientWrapper,
+             .router,
              .routerCore,
              .sharedExtension:
             .production
@@ -123,6 +129,7 @@ enum Targets: String, CaseIterable, PackageAtom {
     static var commonDependenciesForScreen: [Target.Dependency] {
         [
             Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+            Targets.dependencyContainer.asDependency,
             Targets.entity.asDependency,
             Targets.logger.asDependency,
         ]
@@ -130,14 +137,16 @@ enum Targets: String, CaseIterable, PackageAtom {
 
     var pathName: String {
         switch self {
-        case .entity,
+        case .dependencyContainer,
+             .entity,
              .logger:
             "\(capitalizedName)"
         case .getPokemonListUseCase:
             "UseCases/\(capitalizedName)"
         case .pokeAPIClientWrapper:
             "Wrappers/\(capitalizedName)"
-        case .routerCore:
+        case .router,
+             .routerCore:
             "Router/\(capitalizedName)"
         case .sharedExtension:
             "Extension/\(capitalizedName)"
@@ -146,34 +155,48 @@ enum Targets: String, CaseIterable, PackageAtom {
 
     var dependencies: [Target.Dependency] {
         switch self {
+        case .dependencyContainer:
+            [
+                Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+                Targets.entity.asDependency,
+                Targets.routerCore.asDependency,
+                Targets.sharedExtension.asDependency,
+            ]
         case .entity:
             [
                 Targets.sharedExtension.asDependency
             ]
         case .getPokemonListUseCase:
             [
-                Targets.sharedExtension.asDependency,
                 Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
                 Targets.entity.asDependency,
                 Targets.pokeAPIClientWrapper.asDependency,
+                Targets.sharedExtension.asDependency,
             ]
         case .logger:
             [
-                Targets.sharedExtension.asDependency,
                 Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+                Targets.sharedExtension.asDependency,
             ]
         case .pokeAPIClientWrapper:
             [
-                Targets.sharedExtension.asDependency,
                 Dependencies.swiftOpenAPIRuntime.asDependency(productName: .specified(name: "OpenAPIRuntime")),
                 Dependencies.swiftOpenAPIUrlSession.asDependency(productName: .specified(name: "OpenAPIURLSession")),
                 Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
                 Targets.entity.asDependency,
+                Targets.sharedExtension.asDependency,
+            ]
+        case .router:
+            [
+                Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+                Targets.dependencyContainer.asDependency,
+                Targets.routerCore.asDependency,
+                Targets.sharedExtension.asDependency,
             ]
         case .routerCore:
             [
-                Targets.sharedExtension.asDependency,
                 Targets.entity.asDependency,
+                Targets.sharedExtension.asDependency,
             ]
         case .sharedExtension:
             []
