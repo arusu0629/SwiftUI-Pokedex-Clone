@@ -35,6 +35,7 @@ enum Products: String, CaseIterable, PackageAtom {
     case getPokemonListUseCase
     case logger
     case pokeAPIClientWrapper
+    case routerCore
     case sharedExtension
 
     var targets: [String] {
@@ -104,6 +105,7 @@ enum Targets: String, CaseIterable, PackageAtom {
     case getPokemonListUseCase
     case logger
     case pokeAPIClientWrapper
+    case routerCore
     case sharedExtension
 
     var targetType: TargetType {
@@ -112,6 +114,7 @@ enum Targets: String, CaseIterable, PackageAtom {
              .getPokemonListUseCase,
              .logger,
              .pokeAPIClientWrapper,
+             .routerCore,
              .sharedExtension:
             .production
         }
@@ -134,6 +137,8 @@ enum Targets: String, CaseIterable, PackageAtom {
             "UseCases/\(capitalizedName)"
         case .pokeAPIClientWrapper:
             "Wrappers/\(capitalizedName)"
+        case .routerCore:
+            "Router/\(capitalizedName)"
         case .sharedExtension:
             "Extension/\(capitalizedName)"
         }
@@ -163,7 +168,12 @@ enum Targets: String, CaseIterable, PackageAtom {
                 Dependencies.swiftOpenAPIRuntime.asDependency(productName: .specified(name: "OpenAPIRuntime")),
                 Dependencies.swiftOpenAPIUrlSession.asDependency(productName: .specified(name: "OpenAPIURLSession")),
                 Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
-                Targets.entity.asDependency
+                Targets.entity.asDependency,
+            ]
+        case .routerCore:
+            [
+                Targets.sharedExtension.asDependency,
+                Targets.entity.asDependency,
             ]
         case .sharedExtension:
             []
