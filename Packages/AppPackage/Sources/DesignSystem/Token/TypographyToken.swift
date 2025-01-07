@@ -33,6 +33,33 @@ public enum TypographyToken {
     public var uiFont: UIFont {
         UIFont.systemFont(ofSize: fontSize, weight: uiKitWeight)
     }
+
+    public var lineHeight: CGFloat {
+        switch self {
+        case .titleOneRegular,
+             .titleOneBold:
+            34
+        case .titleTwoRegular,
+             .titleTwoBold:
+            28
+        case .titleThreeRegular,
+             .titleThreeBold:
+            25
+        case .headlineSemibold,
+             .bodyRegular,
+             .bodySemibold:
+            22
+        case .subheadlineRegular,
+             .subheadlineSemibold:
+            20
+        case .captionOneRegular,
+             .captionOneMedium:
+            16
+        case .captionTwoRegular,
+             .captionTwoSemibold:
+            13
+        }
+    }
 }
 
 extension TypographyToken {

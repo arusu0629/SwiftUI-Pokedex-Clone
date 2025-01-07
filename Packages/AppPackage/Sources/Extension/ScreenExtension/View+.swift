@@ -30,7 +30,7 @@ extension View {
 extension View {
 
     public func onTrigger(
-        of trigger: TabDoubleTapTrigger,
+        of trigger: TabDoubleTapTrigger?,
         perform: @escaping () -> Void
     ) -> some View {
         onChange(of: trigger) { _, _ in
