@@ -37,6 +37,7 @@ enum Products: String, CaseIterable, PackageAtom {
     case getPokemonListUseCase
     case logger
     case pokeAPIClientWrapper
+    case pokemonListScreen
     case router
     case routerCore
     case screenExtension
@@ -57,6 +58,7 @@ enum Products: String, CaseIterable, PackageAtom {
 // MARK: - Dependencies
 enum Dependencies: String, CaseIterable, PackageAtom {
     case refreshable = "Refreshable"
+    case sfSafeSymbols = "SFSafeSymbols"
     case swiftLint
     case swiftOpenAPIGenerator = "swift-openapi-generator"
     case swiftDependencies = "swift-dependencies"
@@ -68,6 +70,10 @@ enum Dependencies: String, CaseIterable, PackageAtom {
         case .refreshable:
             .package(
                 url: "https://github.com/c-villain/Refreshable.git", exact: "0.2.0"
+            )
+        case .sfSafeSymbols:
+            .package(
+                url: "https://github.com/SFSafeSymbols/SFSafeSymbols.git", exact: "5.3.0"
             )
         case .swiftLint:
             .package(
@@ -116,6 +122,7 @@ enum Targets: String, CaseIterable, PackageAtom {
     case getPokemonListUseCase
     case logger
     case pokeAPIClientWrapper
+    case pokemonListScreen
     case router
     case routerCore
     case screenExtension
@@ -129,6 +136,7 @@ enum Targets: String, CaseIterable, PackageAtom {
              .getPokemonListUseCase,
              .logger,
              .pokeAPIClientWrapper,
+             .pokemonListScreen,
              .router,
              .routerCore,
              .screenExtension,
@@ -140,10 +148,12 @@ enum Targets: String, CaseIterable, PackageAtom {
     static var commonDependenciesForScreen: [Target.Dependency] {
         [
             Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+            Dependencies.sfSafeSymbols.asDependency(productName: .usePackageName),
             Targets.dependencyContainer.asDependency,
             Targets.designSystem.asDependency,
             Targets.entity.asDependency,
             Targets.logger.asDependency,
+            Targets.router.asDependency,
             Targets.screenExtension.asDependency,
         ]
     }
@@ -159,6 +169,8 @@ enum Targets: String, CaseIterable, PackageAtom {
             "UseCases/\(capitalizedName)"
         case .pokeAPIClientWrapper:
             "Wrappers/\(capitalizedName)"
+        case .pokemonListScreen:
+            "Screens/\(capitalizedName)"
         case .router,
              .routerCore:
             "Router/\(capitalizedName)"
@@ -206,6 +218,11 @@ enum Targets: String, CaseIterable, PackageAtom {
                 Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
                 Targets.entity.asDependency,
                 Targets.sharedExtension.asDependency,
+            ]
+        case .pokemonListScreen:
+            Self.commonDependenciesForScreen + [
+                Targets.sharedExtension.asDependency,
+                Targets.getPokemonListUseCase.asDependency,
             ]
         case .router:
             [

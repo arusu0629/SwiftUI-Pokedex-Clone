@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2F7F04B22D2D419E007AEA27 /* Entity in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F04B12D2D419E007AEA27 /* Entity */; };
+		2F7F04B42D2D41F2007AEA27 /* PokemonListScreen in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F04B32D2D41F2007AEA27 /* PokemonListScreen */; };
+		2F7F04B62D2D41F8007AEA27 /* DependencyContainer in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F04B52D2D41F8007AEA27 /* DependencyContainer */; };
+		2F7F04B82D2D41FD007AEA27 /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F04B72D2D41FD007AEA27 /* Router */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		2F72DC8D2D2633810000843F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -70,6 +77,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F7F04B42D2D41F2007AEA27 /* PokemonListScreen in Frameworks */,
+				2F7F04B62D2D41F8007AEA27 /* DependencyContainer in Frameworks */,
+				2F7F04B22D2D419E007AEA27 /* Entity in Frameworks */,
+				2F7F04B82D2D41FD007AEA27 /* Router in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +108,7 @@
 				2F72DC7C2D26337F0000843F /* SwiftUI-Pokedex-Clone */,
 				2F72DC8F2D2633810000843F /* SwiftUI-Pokedex-CloneTests */,
 				2F72DC992D2633810000843F /* SwiftUI-Pokedex-CloneUITests */,
+				2F7F04B02D2D419E007AEA27 /* Frameworks */,
 				2F72DC7B2D26337F0000843F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -109,6 +121,13 @@
 				2F72DC962D2633810000843F /* SwiftUI-Pokedex-CloneUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2F7F04B02D2D419E007AEA27 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +151,10 @@
 			);
 			name = "SwiftUI-Pokedex-Clone";
 			packageProductDependencies = (
+				2F7F04B12D2D419E007AEA27 /* Entity */,
+				2F7F04B32D2D41F2007AEA27 /* PokemonListScreen */,
+				2F7F04B52D2D41F8007AEA27 /* DependencyContainer */,
+				2F7F04B72D2D41FD007AEA27 /* Router */,
 			);
 			productName = "SwiftUI-Pokedex-Clone";
 			productReference = 2F72DC7A2D26337F0000843F /* SwiftUI-Pokedex-Clone.app */;
@@ -588,6 +611,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2F7F04B12D2D419E007AEA27 /* Entity */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Entity;
+		};
+		2F7F04B32D2D41F2007AEA27 /* PokemonListScreen */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PokemonListScreen;
+		};
+		2F7F04B52D2D41F8007AEA27 /* DependencyContainer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DependencyContainer;
+		};
+		2F7F04B72D2D41FD007AEA27 /* Router */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Router;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2F72DC722D26337F0000843F /* Project object */;
 }
