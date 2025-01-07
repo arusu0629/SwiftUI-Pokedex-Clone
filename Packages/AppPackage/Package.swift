@@ -38,6 +38,7 @@ enum Products: String, CaseIterable, PackageAtom {
     case pokeAPIClientWrapper
     case router
     case routerCore
+    case screenExtension
     case sharedExtension
 
     var targets: [String] {
@@ -110,6 +111,7 @@ enum Targets: String, CaseIterable, PackageAtom {
     case pokeAPIClientWrapper
     case router
     case routerCore
+    case screenExtension
     case sharedExtension
 
     var targetType: TargetType {
@@ -121,6 +123,7 @@ enum Targets: String, CaseIterable, PackageAtom {
              .pokeAPIClientWrapper,
              .router,
              .routerCore,
+             .screenExtension,
              .sharedExtension:
             .production
         }
@@ -132,6 +135,7 @@ enum Targets: String, CaseIterable, PackageAtom {
             Targets.dependencyContainer.asDependency,
             Targets.entity.asDependency,
             Targets.logger.asDependency,
+            Targets.screenExtension.asDependency,
         ]
     }
 
@@ -148,7 +152,8 @@ enum Targets: String, CaseIterable, PackageAtom {
         case .router,
              .routerCore:
             "Router/\(capitalizedName)"
-        case .sharedExtension:
+        case .screenExtension,
+             .sharedExtension:
             "Extension/\(capitalizedName)"
         }
     }
@@ -194,6 +199,11 @@ enum Targets: String, CaseIterable, PackageAtom {
                 Targets.sharedExtension.asDependency,
             ]
         case .routerCore:
+            [
+                Targets.entity.asDependency,
+                Targets.sharedExtension.asDependency,
+            ]
+        case .screenExtension:
             [
                 Targets.entity.asDependency,
                 Targets.sharedExtension.asDependency,
