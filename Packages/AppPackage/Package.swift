@@ -32,6 +32,7 @@ extension SwiftSetting {
 // MARK: - Products
 enum Products: String, CaseIterable, PackageAtom {
     case dependencyContainer
+    case designSystem
     case entity
     case getPokemonListUseCase
     case logger
@@ -55,6 +56,7 @@ enum Products: String, CaseIterable, PackageAtom {
 
 // MARK: - Dependencies
 enum Dependencies: String, CaseIterable, PackageAtom {
+    case refreshable = "Refreshable"
     case swiftLint
     case swiftOpenAPIGenerator = "swift-openapi-generator"
     case swiftDependencies = "swift-dependencies"
@@ -63,6 +65,10 @@ enum Dependencies: String, CaseIterable, PackageAtom {
 
     var value: Package.Dependency {
         switch self {
+        case .refreshable:
+            .package(
+                url: "https://github.com/c-villain/Refreshable.git", exact: "0.2.0"
+            )
         case .swiftLint:
             .package(
                 url: "https://github.com/realm/SwiftLint.git",
@@ -105,6 +111,7 @@ enum Dependencies: String, CaseIterable, PackageAtom {
 // MARK: - Targets
 enum Targets: String, CaseIterable, PackageAtom {
     case dependencyContainer
+    case designSystem
     case entity
     case getPokemonListUseCase
     case logger
@@ -117,6 +124,7 @@ enum Targets: String, CaseIterable, PackageAtom {
     var targetType: TargetType {
         switch self {
         case .dependencyContainer,
+             .designSystem,
              .entity,
              .getPokemonListUseCase,
              .logger,
@@ -133,6 +141,7 @@ enum Targets: String, CaseIterable, PackageAtom {
         [
             Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
             Targets.dependencyContainer.asDependency,
+            Targets.designSystem.asDependency,
             Targets.entity.asDependency,
             Targets.logger.asDependency,
             Targets.screenExtension.asDependency,
@@ -142,6 +151,7 @@ enum Targets: String, CaseIterable, PackageAtom {
     var pathName: String {
         switch self {
         case .dependencyContainer,
+             .designSystem,
              .entity,
              .logger:
             "\(capitalizedName)"
@@ -165,6 +175,12 @@ enum Targets: String, CaseIterable, PackageAtom {
                 Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
                 Targets.entity.asDependency,
                 Targets.routerCore.asDependency,
+                Targets.sharedExtension.asDependency,
+            ]
+        case .designSystem:
+            [
+                Dependencies.refreshable.asDependency(productName: .usePackageName),
+                Targets.screenExtension.asDependency,
                 Targets.sharedExtension.asDependency,
             ]
         case .entity:
