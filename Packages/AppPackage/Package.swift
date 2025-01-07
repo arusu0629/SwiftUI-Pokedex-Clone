@@ -57,6 +57,7 @@ enum Products: String, CaseIterable, PackageAtom {
 // MARK: - Dependencies
 enum Dependencies: String, CaseIterable, PackageAtom {
     case refreshable = "Refreshable"
+    case sfSafeSymbols = "SFSafeSymbols"
     case swiftLint
     case swiftOpenAPIGenerator = "swift-openapi-generator"
     case swiftDependencies = "swift-dependencies"
@@ -68,6 +69,10 @@ enum Dependencies: String, CaseIterable, PackageAtom {
         case .refreshable:
             .package(
                 url: "https://github.com/c-villain/Refreshable.git", exact: "0.2.0"
+            )
+        case .sfSafeSymbols:
+            .package(
+                url: "https://github.com/SFSafeSymbols/SFSafeSymbols.git", exact: "5.3.0"
             )
         case .swiftLint:
             .package(
@@ -140,10 +145,12 @@ enum Targets: String, CaseIterable, PackageAtom {
     static var commonDependenciesForScreen: [Target.Dependency] {
         [
             Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+            Dependencies.sfSafeSymbols.asDependency(productName: .usePackageName),
             Targets.dependencyContainer.asDependency,
             Targets.designSystem.asDependency,
             Targets.entity.asDependency,
             Targets.logger.asDependency,
+            Targets.router.asDependency,
             Targets.screenExtension.asDependency,
         ]
     }
