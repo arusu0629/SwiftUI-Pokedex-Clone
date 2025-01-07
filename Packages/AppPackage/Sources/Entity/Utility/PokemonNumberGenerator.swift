@@ -11,7 +11,7 @@ enum PokemonNumberGenerator {
 
     static func generate(from url: String) -> Int? {
         guard !url.isEmpty,
-              let number = generate(from: url) else {
+              let number = generate(fromPokemon: url) else {
             return nil
         }
         return number

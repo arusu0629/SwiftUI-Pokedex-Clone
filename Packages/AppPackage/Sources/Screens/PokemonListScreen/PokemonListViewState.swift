@@ -67,6 +67,11 @@ final class PokemonListViewState {
         try await getData(limitPerPage, offset: .zero)
     }
 
+    func refresh() async throws(ApplicationError) {
+        try await getInitialData()
+        contentId = .init()
+    }
+
     func getNextPageIfNeeded(last pokemon: Pokemon) async throws(ApplicationError) {
         guard pokemons.last == pokemon,
               totalCount != pokemons.count else {
