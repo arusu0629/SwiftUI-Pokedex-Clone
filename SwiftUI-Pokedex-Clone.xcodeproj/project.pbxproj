@@ -11,6 +11,8 @@
 		2F7F04B42D2D41F2007AEA27 /* PokemonListScreen in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F04B32D2D41F2007AEA27 /* PokemonListScreen */; };
 		2F7F04B62D2D41F8007AEA27 /* DependencyContainer in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F04B52D2D41F8007AEA27 /* DependencyContainer */; };
 		2F7F04B82D2D41FD007AEA27 /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F04B72D2D41FD007AEA27 /* Router */; };
+		2F7F05092D2E25C4007AEA27 /* RootScreen in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F05082D2E25C4007AEA27 /* RootScreen */; };
+		2F7F050C2D2E26C9007AEA27 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F050B2D2E26C9007AEA27 /* Dependencies */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +82,9 @@
 				2F7F04B42D2D41F2007AEA27 /* PokemonListScreen in Frameworks */,
 				2F7F04B62D2D41F8007AEA27 /* DependencyContainer in Frameworks */,
 				2F7F04B22D2D419E007AEA27 /* Entity in Frameworks */,
+				2F7F050C2D2E26C9007AEA27 /* Dependencies in Frameworks */,
 				2F7F04B82D2D41FD007AEA27 /* Router in Frameworks */,
+				2F7F05092D2E25C4007AEA27 /* RootScreen in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +159,8 @@
 				2F7F04B32D2D41F2007AEA27 /* PokemonListScreen */,
 				2F7F04B52D2D41F8007AEA27 /* DependencyContainer */,
 				2F7F04B72D2D41FD007AEA27 /* Router */,
+				2F7F05082D2E25C4007AEA27 /* RootScreen */,
+				2F7F050B2D2E26C9007AEA27 /* Dependencies */,
 			);
 			productName = "SwiftUI-Pokedex-Clone";
 			productReference = 2F72DC7A2D26337F0000843F /* SwiftUI-Pokedex-Clone.app */;
@@ -238,6 +244,9 @@
 			);
 			mainGroup = 2F72DC712D26337F0000843F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2F7F050A2D2E26C9007AEA27 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2F72DC7B2D26337F0000843F /* Products */;
 			projectDirPath = "";
@@ -612,6 +621,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		2F7F050A2D2E26C9007AEA27 /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		2F7F04B12D2D419E007AEA27 /* Entity */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -628,6 +648,15 @@
 		2F7F04B72D2D41FD007AEA27 /* Router */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Router;
+		};
+		2F7F05082D2E25C4007AEA27 /* RootScreen */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RootScreen;
+		};
+		2F7F050B2D2E26C9007AEA27 /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F7F050A2D2E26C9007AEA27 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

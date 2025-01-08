@@ -59,3 +59,23 @@ extension Router {
         }
     }
 }
+
+extension Router {
+
+    public func buildTabView(_ tab: RootTab, trigger: TabDoubleTapTrigger?) -> AnyView {
+        switch tab {
+        case .pokemonList:
+            pokemonListViewContainer.view(
+                Router(isPresented: .init(.constant(.pokemonList))),
+                CommonScreenInput(
+                    withNavigation: true,
+                    naviBarLeadingButtonType: nil
+                ),
+                trigger
+            )
+        case .favoritePokemonList:
+            // TODO:
+            AnyView(Text("TestValue of PokemonListView"))
+        }
+    }
+}
