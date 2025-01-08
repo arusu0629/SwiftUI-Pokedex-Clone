@@ -38,6 +38,7 @@ enum Products: String, CaseIterable, PackageAtom {
     case logger
     case pokeAPIClientWrapper
     case pokemonListScreen
+    case rootScreen
     case router
     case routerCore
     case screenExtension
@@ -123,6 +124,7 @@ enum Targets: String, CaseIterable, PackageAtom {
     case logger
     case pokeAPIClientWrapper
     case pokemonListScreen
+    case rootScreen
     case router
     case routerCore
     case screenExtension
@@ -137,6 +139,7 @@ enum Targets: String, CaseIterable, PackageAtom {
              .logger,
              .pokeAPIClientWrapper,
              .pokemonListScreen,
+             .rootScreen,
              .router,
              .routerCore,
              .screenExtension,
@@ -169,7 +172,8 @@ enum Targets: String, CaseIterable, PackageAtom {
             "UseCases/\(capitalizedName)"
         case .pokeAPIClientWrapper:
             "Wrappers/\(capitalizedName)"
-        case .pokemonListScreen:
+        case .pokemonListScreen,
+             .rootScreen:
             "Screens/\(capitalizedName)"
         case .router,
              .routerCore:
@@ -236,6 +240,8 @@ enum Targets: String, CaseIterable, PackageAtom {
                 Targets.entity.asDependency,
                 Targets.sharedExtension.asDependency,
             ]
+        case .rootScreen:
+            Self.commonDependenciesForScreen
         case .screenExtension:
             [
                 Targets.entity.asDependency,
