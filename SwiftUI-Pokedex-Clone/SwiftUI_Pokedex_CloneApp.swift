@@ -5,28 +5,26 @@
 //  Created by af_nakandakari_toru on 2025/01/02.
 //
 
+import Dependencies
+import Entity
+import RootScreen
+import Router
 import SwiftUI
-import SwiftData
 
 @main
 struct SwiftUI_Pokedex_CloneApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @Dependency(\.rootViewContainer) private var rootViewContainer
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            rootViewContainer.view(
+                Router(isPresented: .init(.constant(.root))),
+                CommonScreenInput(
+                    withNavigation: false,
+                    naviBarLeadingButtonType: nil
+                )
+            )
         }
-        .modelContainer(sharedModelContainer)
     }
 }
