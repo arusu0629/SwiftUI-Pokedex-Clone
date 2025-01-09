@@ -34,6 +34,7 @@ enum Products: String, CaseIterable, PackageAtom {
     case dependencyContainer
     case designSystem
     case entity
+    case getPokemonDetailUseCase
     case getPokemonListUseCase
     case logger
     case pokeAPIClientWrapper
@@ -120,6 +121,7 @@ enum Targets: String, CaseIterable, PackageAtom {
     case dependencyContainer
     case designSystem
     case entity
+    case getPokemonDetailUseCase
     case getPokemonListUseCase
     case logger
     case pokeAPIClientWrapper
@@ -135,6 +137,7 @@ enum Targets: String, CaseIterable, PackageAtom {
         case .dependencyContainer,
              .designSystem,
              .entity,
+             .getPokemonDetailUseCase,
              .getPokemonListUseCase,
              .logger,
              .pokeAPIClientWrapper,
@@ -168,7 +171,8 @@ enum Targets: String, CaseIterable, PackageAtom {
              .entity,
              .logger:
             "\(capitalizedName)"
-        case .getPokemonListUseCase:
+        case .getPokemonDetailUseCase,
+             .getPokemonListUseCase:
             "UseCases/\(capitalizedName)"
         case .pokeAPIClientWrapper:
             "Wrappers/\(capitalizedName)"
@@ -203,7 +207,8 @@ enum Targets: String, CaseIterable, PackageAtom {
             [
                 Targets.sharedExtension.asDependency
             ]
-        case .getPokemonListUseCase:
+        case .getPokemonDetailUseCase,
+             .getPokemonListUseCase:
             [
                 Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
                 Targets.entity.asDependency,
