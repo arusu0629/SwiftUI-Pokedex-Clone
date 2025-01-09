@@ -15,6 +15,7 @@ import SwiftUI
 public final class Router: BaseRouter {
 
     @Dependency(\.pokemonListViewContainer) private var pokemonListViewContainer
+    @Dependency(\.pokemonDetailViewContainer) private var pokemonDetailViewContainer
 
     public override func view(
         _ screen: Screen,
@@ -40,6 +41,15 @@ extension Router {
                     naviBarLeadingButtonType: transition.naviBarLeadingButtonType
                 ),
                 nil
+            )
+        case let .pokemonDetail(number):
+            pokemonDetailViewContainer.view(
+                router(transition: transition),
+                CommonScreenInput(
+                    withNavigation: transition.withNavigation,
+                    naviBarLeadingButtonType: transition.naviBarLeadingButtonType
+                ),
+                number
             )
         default:
             // TODO: 他画面対応
