@@ -14,7 +14,7 @@ typealias ViewLogic = PokemonDetailViewLogic
 // MARK: - PokemonDetailViewLogic
 enum PokemonDetailViewLogic {
 
-    static func geSymbolForStatusImage(_ status: PokemonStatus) -> SFSymbol {
+    static func getSymbolForStatusImage(_ status: PokemonStatus) -> SFSymbol {
         switch status.type {
         case .attack:
             .flameFill

@@ -39,7 +39,7 @@ public struct RouterView<Content: View>: View {
             NavigationStack(path: router.navigationPath) {
                 content
                     .navigationDestination(for: Screen.self) { screen in
-                        router.view(screen, transition: .sheet)
+                        router.view(screen, transition: .push)
                     }
                     .sheet(item: router.presentingSheet) { screen in
                         router.view(screen, transition: .sheet)

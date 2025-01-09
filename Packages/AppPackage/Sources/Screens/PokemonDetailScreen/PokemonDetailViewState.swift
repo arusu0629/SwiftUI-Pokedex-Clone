@@ -69,6 +69,15 @@ final class PokemonDetailViewState {
         // TODO: try await getIsFavorite()
         try await updatePokemonDetail()
     }
+
+    func refresh() async throws(ApplicationError) {
+        try await getPokemonDetail()
+        contentId = .init()
+    }
+
+    func updateIsBgAnimationStarted(_ value: Bool) {
+        isBgAnimationStarted = value
+    }
 }
 
 // MARK: - Private
