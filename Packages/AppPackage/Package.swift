@@ -34,6 +34,7 @@ enum Products: String, CaseIterable, PackageAtom {
     case dependencyContainer
     case designSystem
     case entity
+    case favoritePokemonListScreen
     case getAllFavoritePokemonUseCase
     case getFavoritePokemonUseCase
     case getPokemonDetailUseCase
@@ -126,6 +127,7 @@ enum Targets: String, CaseIterable, PackageAtom {
     case dependencyContainer
     case designSystem
     case entity
+    case favoritePokemonListScreen
     case getAllFavoritePokemonUseCase
     case getFavoritePokemonUseCase
     case getPokemonDetailUseCase
@@ -147,6 +149,7 @@ enum Targets: String, CaseIterable, PackageAtom {
         case .dependencyContainer,
              .designSystem,
              .entity,
+             .favoritePokemonListScreen,
              .getAllFavoritePokemonUseCase,
              .getFavoritePokemonUseCase,
              .getPokemonDetailUseCase,
@@ -195,7 +198,8 @@ enum Targets: String, CaseIterable, PackageAtom {
         case .pokeAPIClientWrapper,
              .swiftDataWrapper:
             "Wrappers/\(capitalizedName)"
-        case .pokemonDetailScreen,
+        case .favoritePokemonListScreen,
+             .pokemonDetailScreen,
              .pokemonListScreen,
              .rootScreen:
             "Screens/\(capitalizedName)"
@@ -226,6 +230,11 @@ enum Targets: String, CaseIterable, PackageAtom {
         case .entity:
             [
                 Targets.sharedExtension.asDependency
+            ]
+        case .favoritePokemonListScreen:
+            Self.commonDependenciesForScreen + [
+                Targets.getAllFavoritePokemonUseCase.asDependency,
+                Targets.sharedExtension.asDependency,
             ]
         case .getAllFavoritePokemonUseCase,
              .getFavoritePokemonUseCase:
