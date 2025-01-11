@@ -34,6 +34,8 @@ enum Products: String, CaseIterable, PackageAtom {
     case dependencyContainer
     case designSystem
     case entity
+    case getAllFavoritePokemonUseCase
+    case getFavoritePokemonUseCase
     case getPokemonDetailUseCase
     case getPokemonListUseCase
     case logger
@@ -124,6 +126,8 @@ enum Targets: String, CaseIterable, PackageAtom {
     case dependencyContainer
     case designSystem
     case entity
+    case getAllFavoritePokemonUseCase
+    case getFavoritePokemonUseCase
     case getPokemonDetailUseCase
     case getPokemonListUseCase
     case logger
@@ -143,6 +147,8 @@ enum Targets: String, CaseIterable, PackageAtom {
         case .dependencyContainer,
              .designSystem,
              .entity,
+             .getAllFavoritePokemonUseCase,
+             .getFavoritePokemonUseCase,
              .getPokemonDetailUseCase,
              .getPokemonListUseCase,
              .logger,
@@ -180,7 +186,9 @@ enum Targets: String, CaseIterable, PackageAtom {
              .entity,
              .logger:
             "\(capitalizedName)"
-        case .getPokemonDetailUseCase,
+        case .getAllFavoritePokemonUseCase,
+             .getFavoritePokemonUseCase,
+             .getPokemonDetailUseCase,
              .getPokemonListUseCase,
              .saveFavoritePokemonUseCase:
             "UseCases/\(capitalizedName)"
@@ -218,6 +226,13 @@ enum Targets: String, CaseIterable, PackageAtom {
         case .entity:
             [
                 Targets.sharedExtension.asDependency
+            ]
+        case .getAllFavoritePokemonUseCase,
+             .getFavoritePokemonUseCase:
+            [
+                Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+                Targets.entity.asDependency,
+                Targets.swiftDataWrapper.asDependency,
             ]
         case .getPokemonDetailUseCase,
              .getPokemonListUseCase:
