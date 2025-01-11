@@ -16,6 +16,7 @@ public final class Router: BaseRouter {
 
     @Dependency(\.pokemonListViewContainer) private var pokemonListViewContainer
     @Dependency(\.pokemonDetailViewContainer) private var pokemonDetailViewContainer
+    @Dependency(\.favoritePokemonListViewContainer) private var favoritePokemonListViewContainer
 
     public override func view(
         _ screen: Screen,
@@ -84,8 +85,14 @@ extension Router {
                 trigger
             )
         case .favoritePokemonList:
-            // TODO:
-            AnyView(Text("TestValue of PokemonListView"))
+            favoritePokemonListViewContainer.view(
+                Router(isPresented: .init(.constant(.favoritePokemonList))),
+                CommonScreenInput(
+                    withNavigation: true,
+                    naviBarLeadingButtonType: nil
+                ),
+                trigger
+            )
         }
     }
 }
