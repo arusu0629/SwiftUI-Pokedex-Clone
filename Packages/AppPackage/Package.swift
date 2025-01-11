@@ -45,6 +45,7 @@ enum Products: String, CaseIterable, PackageAtom {
     case routerCore
     case screenExtension
     case sharedExtension
+    case swiftDataWrapper
 
     var targets: [String] {
         Targets.targets(for: self)
@@ -133,6 +134,7 @@ enum Targets: String, CaseIterable, PackageAtom {
     case routerCore
     case screenExtension
     case sharedExtension
+    case swiftDataWrapper
 
     var targetType: TargetType {
         switch self {
@@ -149,7 +151,8 @@ enum Targets: String, CaseIterable, PackageAtom {
              .router,
              .routerCore,
              .screenExtension,
-             .sharedExtension:
+             .sharedExtension,
+             .swiftDataWrapper:
             .production
         }
     }
@@ -177,7 +180,8 @@ enum Targets: String, CaseIterable, PackageAtom {
         case .getPokemonDetailUseCase,
              .getPokemonListUseCase:
             "UseCases/\(capitalizedName)"
-        case .pokeAPIClientWrapper:
+        case .pokeAPIClientWrapper,
+             .swiftDataWrapper:
             "Wrappers/\(capitalizedName)"
         case .pokemonDetailScreen,
              .pokemonListScreen,
@@ -263,6 +267,12 @@ enum Targets: String, CaseIterable, PackageAtom {
             ]
         case .sharedExtension:
             []
+        case .swiftDataWrapper:
+            [
+                Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+                Targets.sharedExtension.asDependency,
+                Targets.entity.asDependency,
+            ]
         }
     }
 
