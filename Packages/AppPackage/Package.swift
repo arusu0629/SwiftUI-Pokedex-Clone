@@ -244,6 +244,7 @@ enum Targets: String, CaseIterable, PackageAtom {
             Self.commonDependenciesForScreen + [
                 Targets.sharedExtension.asDependency,
                 Targets.getPokemonDetailUseCase.asDependency,
+                Targets.saveFavoritePokemonUseCase.asDependency,
             ]
         case .pokemonListScreen:
             Self.commonDependenciesForScreen + [

@@ -161,7 +161,7 @@ extension PokemonDetailView {
                 )
             ) { isFavorite in
                 Task {
-                    // TODO: await state.updateIsFavorite(isFavorite)
+                    await updateIsFavorite(isFavorite)
                 }
             }
         }
@@ -286,6 +286,14 @@ extension PokemonDetailView {
         do {
             try? await Task.sleep(for: .seconds(1.0))
             try await state.refresh()
+        } catch {
+            // TODO:
+        }
+    }
+
+    private func updateIsFavorite(_ value: Bool) async {
+        do {
+            try await state.updateIsFavorite(value)
         } catch {
             // TODO:
         }

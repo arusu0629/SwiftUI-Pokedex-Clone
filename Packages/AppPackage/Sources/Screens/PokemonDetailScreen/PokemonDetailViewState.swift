@@ -12,8 +12,8 @@ import Entity
 private import GetPokemonDetailUseCase
 /* TODO:
 private import GetFavoritePokemonUseCase
-private import SaveFavoritePokemonUseCase
  */
+private import SaveFavoritePokemonUseCase
 import Logger
 
 // MARK: - PokemonDetailViewState
@@ -26,6 +26,9 @@ final class PokemonDetailViewState {
 
     @ObservationIgnored
     @Dependency(\.getPokemonDetailUseCase) private var getPokemonDetailUseCase
+
+    @ObservationIgnored
+    @Dependency(\.saveFavoritePokemonUseCase) private var saveFavoritePokemonUseCase
 
     private(set) var contentId: UUID = .init()
 
@@ -78,6 +81,10 @@ final class PokemonDetailViewState {
     func updateIsBgAnimationStarted(_ value: Bool) {
         isBgAnimationStarted = value
     }
+
+    func updateIsFavorite(_ value: Bool) async throws(ApplicationError) {
+        try await saveIsFavorite(value)
+    }
 }
 
 // MARK: - Private
@@ -87,4 +94,13 @@ extension PokemonDetailViewState {
         let data = try await getPokemonDetailUseCase.execute(pokemonNumber)
         pokemonDetail = data
     }
+
+    private func saveIsFavorite(_ value: Bool) async throws(ApplicationError) {
+        guard let favorable = ViewLogic.generateFavorablePokemon(pokemonDetail, isFavorite: value) else {
+            return
+        }
+        try await saveFavoritePokemonUseCase.execute(favorable)
+        isFavorite = value
+    }
+
 }
