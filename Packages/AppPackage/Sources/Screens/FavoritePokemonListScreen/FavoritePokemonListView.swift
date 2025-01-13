@@ -175,7 +175,17 @@ extension FavoritePokemonListView {
         do {
             try await state.getData()
         } catch {
-            // TODO:
+            router.presentAlertView(
+                error: error,
+                buttons: [
+                    .ok(action: nil),
+                    .retry {
+                        Task {
+                            await getData()
+                        }
+                    }
+                ]
+            )
         }
     }
 
@@ -184,11 +194,20 @@ extension FavoritePokemonListView {
             try? await Task.sleep(for: .seconds(1.0))
             try await state.refresh()
         } catch {
-            // TODO: d
+            router.presentAlertView(
+                error: error,
+                buttons: [
+                    .ok(action: nil),
+                    .retry {
+                        Task {
+                            await refresh()
+                        }
+                    }
+                ]
+            )
         }
     }
 }
-
 
 #Preview {
     FavoritePokemonListView(

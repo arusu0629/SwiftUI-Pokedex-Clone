@@ -178,7 +178,17 @@ extension PokemonListView {
         do {
             try await state.getInitialData()
         } catch {
-            // TODO:
+            router.presentAlertView(
+                error: error,
+                buttons: [
+                    .ok(action: nil),
+                    .retry {
+                        Task {
+                            await getInitialData()
+                        }
+                    },
+                ]
+            )
         }
     }
 
@@ -187,7 +197,18 @@ extension PokemonListView {
             try? await Task.sleep(for: .seconds(1.0))
             try await state.refresh()
         } catch {
-            // TODO:
+            router.presentAlertView(
+                error: error,
+                buttons: [
+                    .ok(action: nil),
+                    .retry {
+                        Task {
+                            await refresh()
+                        }
+                    },
+                ]
+            )
+
         }
     }
 
@@ -195,7 +216,17 @@ extension PokemonListView {
         do {
             try await state.getNextPageIfNeeded(last: last)
         } catch {
-            // TODO:
+            router.presentAlertView(
+                error: error,
+                buttons: [
+                    .ok(action: nil),
+                    .retry {
+                        Task {
+                            await getNextPageIfNeeded(last: last)
+                        }
+                    },
+                ]
+            )
         }
     }
 }

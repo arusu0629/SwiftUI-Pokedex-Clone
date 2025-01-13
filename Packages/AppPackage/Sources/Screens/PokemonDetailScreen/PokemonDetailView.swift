@@ -278,7 +278,17 @@ extension PokemonDetailView {
         do {
             try await state.getPokemonDetail()
         } catch {
-            // TODO:
+            router.presentAlertView(
+                error: error,
+                buttons: [
+                    .ok(action: nil),
+                    .retry {
+                        Task {
+                            await getPokemonDetail()
+                        }
+                    },
+                ]
+            )
         }
     }
 
@@ -287,7 +297,18 @@ extension PokemonDetailView {
             try? await Task.sleep(for: .seconds(1.0))
             try await state.refresh()
         } catch {
-            // TODO:
+            router.presentAlertView(
+                error: error,
+                buttons: [
+                    .ok(action: nil),
+                    .retry {
+                        Task {
+                            await refresh()
+                        }
+                    },
+                ]
+            )
+
         }
     }
 
@@ -295,7 +316,12 @@ extension PokemonDetailView {
         do {
             try await state.updateIsFavorite(value)
         } catch {
-            // TODO:
+            router.presentAlertView(
+                error: error,
+                buttons: [
+                    .ok(action: nil),
+                ]
+            )
         }
     }
 }
