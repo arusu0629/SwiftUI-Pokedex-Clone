@@ -34,6 +34,9 @@ enum Products: String, CaseIterable, PackageAtom {
     case dependencyContainer
     case designSystem
     case entity
+    case favoritePokemonListScreen
+    case getAllFavoritePokemonUseCase
+    case getFavoritePokemonUseCase
     case getPokemonDetailUseCase
     case getPokemonListUseCase
     case logger
@@ -43,8 +46,10 @@ enum Products: String, CaseIterable, PackageAtom {
     case rootScreen
     case router
     case routerCore
+    case saveFavoritePokemonUseCase
     case screenExtension
     case sharedExtension
+    case swiftDataWrapper
 
     var targets: [String] {
         Targets.targets(for: self)
@@ -122,6 +127,9 @@ enum Targets: String, CaseIterable, PackageAtom {
     case dependencyContainer
     case designSystem
     case entity
+    case favoritePokemonListScreen
+    case getAllFavoritePokemonUseCase
+    case getFavoritePokemonUseCase
     case getPokemonDetailUseCase
     case getPokemonListUseCase
     case logger
@@ -131,14 +139,19 @@ enum Targets: String, CaseIterable, PackageAtom {
     case rootScreen
     case router
     case routerCore
+    case saveFavoritePokemonUseCase
     case screenExtension
     case sharedExtension
+    case swiftDataWrapper
 
     var targetType: TargetType {
         switch self {
         case .dependencyContainer,
              .designSystem,
              .entity,
+             .favoritePokemonListScreen,
+             .getAllFavoritePokemonUseCase,
+             .getFavoritePokemonUseCase,
              .getPokemonDetailUseCase,
              .getPokemonListUseCase,
              .logger,
@@ -148,8 +161,10 @@ enum Targets: String, CaseIterable, PackageAtom {
              .rootScreen,
              .router,
              .routerCore,
+             .saveFavoritePokemonUseCase,
              .screenExtension,
-             .sharedExtension:
+             .sharedExtension,
+             .swiftDataWrapper:
             .production
         }
     }
@@ -174,12 +189,17 @@ enum Targets: String, CaseIterable, PackageAtom {
              .entity,
              .logger:
             "\(capitalizedName)"
-        case .getPokemonDetailUseCase,
-             .getPokemonListUseCase:
+        case .getAllFavoritePokemonUseCase,
+             .getFavoritePokemonUseCase,
+             .getPokemonDetailUseCase,
+             .getPokemonListUseCase,
+             .saveFavoritePokemonUseCase:
             "UseCases/\(capitalizedName)"
-        case .pokeAPIClientWrapper:
+        case .pokeAPIClientWrapper,
+             .swiftDataWrapper:
             "Wrappers/\(capitalizedName)"
-        case .pokemonDetailScreen,
+        case .favoritePokemonListScreen,
+             .pokemonDetailScreen,
              .pokemonListScreen,
              .rootScreen:
             "Screens/\(capitalizedName)"
@@ -211,6 +231,18 @@ enum Targets: String, CaseIterable, PackageAtom {
             [
                 Targets.sharedExtension.asDependency
             ]
+        case .favoritePokemonListScreen:
+            Self.commonDependenciesForScreen + [
+                Targets.getAllFavoritePokemonUseCase.asDependency,
+                Targets.sharedExtension.asDependency,
+            ]
+        case .getAllFavoritePokemonUseCase,
+             .getFavoritePokemonUseCase:
+            [
+                Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+                Targets.entity.asDependency,
+                Targets.swiftDataWrapper.asDependency,
+            ]
         case .getPokemonDetailUseCase,
              .getPokemonListUseCase:
             [
@@ -235,7 +267,9 @@ enum Targets: String, CaseIterable, PackageAtom {
         case .pokemonDetailScreen:
             Self.commonDependenciesForScreen + [
                 Targets.sharedExtension.asDependency,
+                Targets.getFavoritePokemonUseCase.asDependency,
                 Targets.getPokemonDetailUseCase.asDependency,
+                Targets.saveFavoritePokemonUseCase.asDependency,
             ]
         case .pokemonListScreen:
             Self.commonDependenciesForScreen + [
@@ -256,6 +290,12 @@ enum Targets: String, CaseIterable, PackageAtom {
             ]
         case .rootScreen:
             Self.commonDependenciesForScreen
+        case .saveFavoritePokemonUseCase:
+            [
+                Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+                Targets.entity.asDependency,
+                Targets.swiftDataWrapper.asDependency,
+            ]
         case .screenExtension:
             [
                 Targets.entity.asDependency,
@@ -263,6 +303,12 @@ enum Targets: String, CaseIterable, PackageAtom {
             ]
         case .sharedExtension:
             []
+        case .swiftDataWrapper:
+            [
+                Dependencies.swiftDependencies.asDependency(productName: .specified(name: "Dependencies")),
+                Targets.sharedExtension.asDependency,
+                Targets.entity.asDependency,
+            ]
         }
     }
 

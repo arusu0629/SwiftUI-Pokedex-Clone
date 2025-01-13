@@ -14,6 +14,7 @@
 		2F7F05092D2E25C4007AEA27 /* RootScreen in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F05082D2E25C4007AEA27 /* RootScreen */; };
 		2F7F050C2D2E26C9007AEA27 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F050B2D2E26C9007AEA27 /* Dependencies */; };
 		2F7F05192D2FDC16007AEA27 /* PokemonDetailScreen in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F05182D2FDC16007AEA27 /* PokemonDetailScreen */; };
+		2F7F05232D321ADC007AEA27 /* FavoritePokemonListScreen in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7F05222D321ADC007AEA27 /* FavoritePokemonListScreen */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 				2F7F05192D2FDC16007AEA27 /* PokemonDetailScreen in Frameworks */,
 				2F7F050C2D2E26C9007AEA27 /* Dependencies in Frameworks */,
 				2F7F04B82D2D41FD007AEA27 /* Router in Frameworks */,
+				2F7F05232D321ADC007AEA27 /* FavoritePokemonListScreen in Frameworks */,
 				2F7F05092D2E25C4007AEA27 /* RootScreen in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,6 +166,7 @@
 				2F7F05082D2E25C4007AEA27 /* RootScreen */,
 				2F7F050B2D2E26C9007AEA27 /* Dependencies */,
 				2F7F05182D2FDC16007AEA27 /* PokemonDetailScreen */,
+				2F7F05222D321ADC007AEA27 /* FavoritePokemonListScreen */,
 			);
 			productName = "SwiftUI-Pokedex-Clone";
 			productReference = 2F72DC7A2D26337F0000843F /* SwiftUI-Pokedex-Clone.app */;
@@ -664,6 +667,10 @@
 		2F7F05182D2FDC16007AEA27 /* PokemonDetailScreen */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PokemonDetailScreen;
+		};
+		2F7F05222D321ADC007AEA27 /* FavoritePokemonListScreen */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FavoritePokemonListScreen;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
