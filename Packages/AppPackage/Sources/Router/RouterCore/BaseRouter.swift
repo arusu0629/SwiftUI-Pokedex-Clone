@@ -50,11 +50,23 @@ extension BaseRouter {
         }
     }
 
-    /* TODO:
     public func presentAlertView(error: ApplicationError, buttons: [AlertButtonType]) {
-
+        let screen: Screen = .alert(error: error, buttons: buttons)
+        present(fullScreen: screen, withAnimation: false)
     }
-     */
+
+    public func dismiss(withAnimation: Bool = true) {
+        if withAnimation {
+            dismiss()
+        } else {
+            var transaction = Transaction()
+            transaction.disablesAnimations = true
+
+            withTransaction(transaction) {
+                dismiss()
+            }
+        }
+    }
 
     public func dismiss() {
         if state.presentingSheet != nil {
