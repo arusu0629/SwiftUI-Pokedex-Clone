@@ -31,6 +31,7 @@ extension SwiftSetting {
 
 // MARK: - Products
 enum Products: String, CaseIterable, PackageAtom {
+    case alertScreen
     case dependencyContainer
     case designSystem
     case entity
@@ -124,6 +125,7 @@ enum Dependencies: String, CaseIterable, PackageAtom {
 
 // MARK: - Targets
 enum Targets: String, CaseIterable, PackageAtom {
+    case alertScreen
     case dependencyContainer
     case designSystem
     case entity
@@ -146,7 +148,8 @@ enum Targets: String, CaseIterable, PackageAtom {
 
     var targetType: TargetType {
         switch self {
-        case .dependencyContainer,
+        case .alertScreen,
+             .dependencyContainer,
              .designSystem,
              .entity,
              .favoritePokemonListScreen,
@@ -198,7 +201,8 @@ enum Targets: String, CaseIterable, PackageAtom {
         case .pokeAPIClientWrapper,
              .swiftDataWrapper:
             "Wrappers/\(capitalizedName)"
-        case .favoritePokemonListScreen,
+        case .alertScreen,
+             .favoritePokemonListScreen,
              .pokemonDetailScreen,
              .pokemonListScreen,
              .rootScreen:
@@ -288,7 +292,8 @@ enum Targets: String, CaseIterable, PackageAtom {
                 Targets.entity.asDependency,
                 Targets.sharedExtension.asDependency,
             ]
-        case .rootScreen:
+        case .alertScreen,
+             .rootScreen:
             Self.commonDependenciesForScreen
         case .saveFavoritePokemonUseCase:
             [

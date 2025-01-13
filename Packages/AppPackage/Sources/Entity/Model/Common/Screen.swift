@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Screen
 public enum Screen: Equatable, Hashable {
     case root
-    // TODO: case alert(error: ApplicationError, buttons: [AlertButtonType])
+    case alert(error: ApplicationError, buttons: [AlertButtonType])
     case pokemonList
     case pokemonDetail(number: Int)
     case favoritePokemonList
